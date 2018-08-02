@@ -5,7 +5,7 @@ class ListeActive extends Component{
         return(
             <div className="liste-active-main">
                 <div className="titre-page">
-                    <span>Cas #2 : liste en cours...</span>
+                    <span>Liste en cours pour le 12/10/2018</span>
                 </div>
             </div>
         );

@@ -10,11 +10,11 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Fever courses</h1>
         </header>
-        <div className="ListeVide">
+        <div className="liste">
           <ListeVide />
         </div>
         <hr />
-        <div className="ListeActive">
+        <div className="liste">
           <ListeActive />
         </div>
       </div>
