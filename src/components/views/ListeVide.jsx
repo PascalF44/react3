@@ -1,25 +1,19 @@
 import React, {Component} from "react"
 
 class ListeVide extends Component{
-    constructor(props, context){
-        super(props, context);
-        this.state={
-            dateCourse: ""
-        };
-
-        this.dateCourse=this.dateCourse.bind(this);
-    }
-
-    dateCourse(e){
-        this.setState({
-            dateCourse: e.target.value
-        });
+    constructor(props){
+        super(props);
+        this.state={ nomCourse:"", key: "" };
+        this.addListe=this.addListe.bind(this);
     }
 
     addListe(e){
-        this.setState({ 
-            dateCourse: this.state.dateCourse
-        });
+        if (this._inputListe.value !== "") {
+            this.setState({ 
+                nomCourse: this._inputListe.value,
+                key: Date.now()
+            });
+        }
 
         e.preventDefault();
     }
@@ -30,9 +24,9 @@ class ListeVide extends Component{
                 <div className="liste-titre vide">
                     <span>Pas de liste en cours...</span>
                 </div>
-                <div className="liste-vide-form">
+                <div className="liste-form">
                     <form onSubmit={this.addListe}>
-                        <input onChange={this.dateCourse} placeholder="pour quand ?" />
+                        <input ref={(a) => this._inputListe = a} placeholder="pour quand ?" />
                         <button type="submit">Démarrer !</button>
                     </form>
                 </div>
