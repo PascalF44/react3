@@ -3,19 +3,24 @@ import React, {Component} from "react"
 class ListeVide extends Component{
     constructor(props){
         super(props);
-        this.state={ nomCourse:"", key: "" };
-        this.addListe=this.addListe.bind(this);
+        this.state={ nomCourse:"", key: "" }; 
     }
+    
+    addListe = (e) => {
+        e.preventDefault();
+        var txt=this._inputListe.value;
+        console.log('ListeVide->input: ' + txt);
 
-    addListe(e){
-        if (this._inputListe.value !== "") {
+        if (txt !== "") {
             this.setState({ 
-                nomCourse: this._inputListe.value,
+                nomCourse: txt,
                 key: Date.now()
             });
         }
 
-        e.preventDefault();
+        this.props.propsChild(txt);
+        console.log('ListeVide->state.nomCourse: ' + this.state.nomCourse);
+        console.log('ListeVide->state.key: ' + this.state.key);
     }
 
     render(){
@@ -26,7 +31,7 @@ class ListeVide extends Component{
                 </div>
                 <div className="liste-form">
                     <form onSubmit={this.addListe}>
-                        <input ref={(a) => this._inputListe = a} placeholder="pour quand ?" />
+                        <input ref={(a) => this._inputListe = a} placeholder="kankon yva ?" />
                         <button type="submit">Démarrer !</button>
                     </form>
                 </div>
