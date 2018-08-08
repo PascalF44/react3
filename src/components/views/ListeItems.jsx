@@ -1,8 +1,17 @@
 import React, {Component} from "react";
 
 class ListeItems extends Component{
-    creerListe(item){
-        return <li key={item.key} onClick={()=>this.deleteItem(item.key)}>{item.nomItem}</li>
+    constructor(props){
+        super(props);
+        this.state={bidon: ""};
+    }
+
+    creerListe = (item) => {
+        return <li key={item.key} onClick={()=>this.delete(item.key)}>{item.nomItem}</li>
+    }
+
+    delete = (key) => {
+        this.props.delete(key);
     }
  
     render(){

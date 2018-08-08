@@ -33,7 +33,13 @@ class ListeActive extends Component{
     }
 
     deleteItem = (key) => {
-        this.props.deleteItem(key);
+        var filteredItems=this.state.items.filter(function(item){
+            return (item.key !== key);
+        });
+
+        this.setState({
+            items: filteredItems
+        })
     }
 
     render(){
@@ -54,7 +60,7 @@ class ListeActive extends Component{
                         </div>
                     </form>
                 </div>
-                <ListeItems liste={this.state.items}/>
+                <ListeItems liste={this.state.items} delete={this.deleteItem}/>
            </div>
         );
     }
