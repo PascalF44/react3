@@ -6,12 +6,17 @@ import ListeActive from "./views/ListeActive";
 class App extends Component {
   constructor(props){
     super(props);
-    this.state={nomListeFromChild: ""};
+    this.state={nomListeFromChild: "", listeActive: false};
   }
 
   myCallbackNomListe = (parm) => {
-    console.log("APP->myCallbackNomListe(" + parm + ")")
+    console.log("APP->myCallbackNomListe(" + parm + ")");
     this.setState({nomListeFromChild: parm});
+  }
+
+  myCallBackListeAffiche = (parm) => {
+    console.log("App->myCallBackListeAffiche(" + parm + ")");
+    this.setState({listeActive: parm});
   }
 
   render() {
@@ -22,7 +27,9 @@ class App extends Component {
         </header>
         <div className="row">
           <div className="col-sm-12 col-md-6 liste">
-            <ListeVide propsChild={this.myCallbackNomListe} />
+        	{!this.state.listeActive &&
+              <ListeVide propsChild={this.myCallbackNomListe} propsChildActive={this.myCallBackListeAffiche} />
+			}
           </div>
           <div className="col-sm-12 col-md-6 liste">
             <ListeActive propsChild={this.state.nomListeFromChild} />

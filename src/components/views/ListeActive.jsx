@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {Button} from 'mdbreact';
 import ListeItems from "./ListeItems";
 
 class ListeActive extends Component{
@@ -38,13 +39,19 @@ class ListeActive extends Component{
     render(){
         return(
             <div>
-                <div className="liste-titre active">
+                <div className="liste-header active">
                     <span>Liste en cours pour {this.props.propsChild}</span>
                 </div>
                 <div className="liste-form">
                     <form onSubmit={this.addItem}>
-                        <input ref={(a) => this._inputItem = a} placeholder="keskifô ?" />
-                        <button type="submit">Ajouter...</button>
+                        <div className="row">
+                            <div className="col-md-6">
+                                <input type="text" className="form-control form-control-sm" placeholder="keskifô ?" ref={(a) => this._inputItem = a} />
+                            </div>
+                            <div className="col-md-6">
+                                <Button color="primary" size="sm" type="submit">Ajouter...</Button>
+                            </div>
+                        </div>
                     </form>
                 </div>
                 <ListeItems liste={this.state.items}/>

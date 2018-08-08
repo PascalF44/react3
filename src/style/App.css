@@ -27,13 +27,17 @@
   to { transform: rotate(360deg); }
 }
 
-.liste-titre {
+.liste-header {
   padding: 15px;
   margin-top: 5%;
   margin-bottom: 5%;
   margin-right: 10%;
   margin-left: 10%;
   border-radius: 5px;
+}
+
+.liste-form {
+  margin-left: 10%;
 }
 
 .vide {
@@ -44,20 +48,3 @@
   background-color: rgba(7, 192, 32, 0.4);
 }
 
-.liste-form input {
-  padding: 10px;
-  font-size: 16px;
-  border: 2x solid #FFF;
-  width: 200px;
-  border-radius: 5px;
-}
-
-.liste-form button {
-  padding: 10px;
-  font-size: 16px;
-  margin: 10px;
-  margin-right: 0px;
-  background-color: #0066ff;
-  color: #FFF;
-  border-radius: 5px;
-}
