@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import {Button} from 'mdbreact';
 import ListeItems from "./ListeItems";
 
 class ListeActive extends Component{
@@ -51,16 +50,16 @@ class ListeActive extends Component{
                 <div className="liste-form">
                     <form onSubmit={this.addItem}>
                         <div className="row">
-                            <div className="col-md-6">
-                                <input type="text" className="form-control form-control-sm" placeholder="keskifô ?" ref={(a) => this._inputItem = a} />
+                            <div className="col-md-9">
+                                <input className="form-control" placeholder="keskifô ?" ref={(a) => this._inputItem = a} />
                             </div>
-                            <div className="col-md-6">
-                                <Button color="primary" size="sm" type="submit">Ajouter...</Button>
+                            <div className="col-md-2">
+                                <button className="btn btn-primary" type="submit"><i className="fas fa-cart-plus" /></button>
                             </div>
                         </div>
                     </form>
                 </div>
-                <ListeItems liste={this.state.items} delete={this.deleteItem}/>
+                <ListeItems liste={this.state.items} delete={this.deleteItem} />
            </div>
         );
     }

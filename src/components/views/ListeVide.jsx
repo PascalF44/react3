@@ -1,5 +1,4 @@
-import React, {Component} from "react";
-import {Button} from 'mdbreact';
+import React, {Component} from 'react'
 
 class ListeVide extends Component{
     constructor(props){
@@ -35,11 +34,11 @@ class ListeVide extends Component{
                 <div className="liste-form">
                     <form onSubmit={this.addListe}>
                         <div className="row">
-                            <div className="col-md-6">
-                                <input type="text" className="form-control form-control-sm" placeholder="kan kon yva?" ref={(a) => this._inputListe = a} />
+                            <div className="col-md-9">
+                                <input className="form-control" placeholder="kan kon yva?" ref={(a) => this._inputListe = a} />
                             </div>
-                            <div className="col-md-6">
-                                <Button color="primary" size="sm" type="submit">Go !</Button>
+                            <div className="col-md-2">
+                                <button className="btn btn-primary" type="submit"><i className="far fa-play-circle" /></button>
                             </div>
                         </div>
                     </form>
