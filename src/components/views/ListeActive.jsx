@@ -50,10 +50,10 @@ class ListeActive extends Component{
                 <div className="liste-form">
                     <form onSubmit={this.addItem}>
                         <div className="row">
-                            <div className="col-md-9">
+                            <div className="col-9">
                                 <input className="form-control" placeholder="keskifô ?" ref={(a) => this._inputItem = a} />
                             </div>
-                            <div className="col-md-2">
+                            <div className="col-2">
                                 <button className="btn btn-primary" type="submit"><i className="fas fa-cart-plus" /></button>
                             </div>
                         </div>

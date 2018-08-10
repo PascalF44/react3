@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import {Checkbox} from '@material-ui/core';
 
 class ListeItems extends Component{
     constructor(props){
@@ -12,14 +11,18 @@ class ListeItems extends Component{
     }
     
     creerListe = (item) => {
-        return( 
-            <li key={item.key}>
-                <Checkbox value="checkedA" onChange={this.handleChange('checkedA')} />
-                {item.nomItem}
-                <button className="btn btn-danger" onClick={()=>this.delete(item.key)}>
-                    <i className="fas fa-trash" />
-                </button>
-            </li>
+        return(
+            <div className="row item-ligne">
+                <div className="item-check col-1">
+                    <input type="checkbox" onChange={this.handleChange(item.key)} />
+                </div>
+                <div className="item-lib col-10">
+                    {item.nomItem}
+                </div>
+                <div className="item-del col-1">
+                    <i className="far fa-trash-alt" onClick={()=>this.delete(item.key)} />
+                </div>
+            </div>
         );
     }
 
@@ -31,7 +34,11 @@ class ListeItems extends Component{
         var listeParam=this.props.liste;
         var ListeItems=listeParam.map(this.creerListe);
 
-        return(<ul className="liste-items">{ListeItems}</ul>);
+        return(
+            <div className="liste-items">
+                {ListeItems}
+            </div>
+        );
     }
 };
 

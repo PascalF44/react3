@@ -21,18 +21,23 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Fever courses</h1>
-        </header>
+      <div className="container">
+        <nav className="navbar sticky-top navbar-dark bg-danger">
+          <a className="navbar-brand">
+            <i className="fab fa-hotjar fa-3x d-inline-block align-top" />
+            &nbsp; Fever courses
+          </a>
+        </nav>
         <div className="row">
           <div className="col-sm-12 col-md-6 liste">
-        	{!this.state.listeActive &&
-              <ListeVide propsChild={this.myCallbackNomListe} propsChildActive={this.myCallBackListeAffiche} />
-			}
+            {!this.state.listeActive &&
+                <ListeVide propsChild={this.myCallbackNomListe} propsChildActive={this.myCallBackListeAffiche} />
+            }
           </div>
           <div className="col-sm-12 col-md-6 liste">
-            <ListeActive propsChild={this.state.nomListeFromChild} />
+            {this.state.listeActive &&
+              <ListeActive propsChild={this.state.nomListeFromChild} />
+            }
           </div>
         </div>
       </div>
