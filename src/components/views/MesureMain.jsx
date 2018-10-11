@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import Moment from 'react-moment';
 
 class MesureMain extends Component{
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state={ heure: '', valeur: '' }
     }
@@ -13,18 +13,19 @@ class MesureMain extends Component{
      * this.props.mesure = mesure
      */
 
-    simulapi(){
+    simulapi = () => {
         const hhmm = new Date();
         const temper = Math.random() * 20;
+        const newMesure =  { heure: hhmm, valeur: temper };
 
         this.setState(() => { 
-            return { heure: hhmm, valeur: temper }
+            return newMesure;
         });
 
-        this.props.mesure = { heure: hhmm, valeur: temper };
+        this.props.mesure(newMesure);
     }
 
-    render(){
+    render() {
         let hhmm = this.state.heure;
         let temper = this.state.valeur;
 

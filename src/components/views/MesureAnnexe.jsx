@@ -6,8 +6,10 @@ class MesureAnnexe extends Component{
     }
 
     render(){
-        let hhmm=this.props.mesure.heure;
-        let temper=this.props.mesure.valeur;
+        // let hhmm=this.props.mesure.heure;
+        // let temper=this.props.mesure.valeur;
+        let hhmm = '';
+        let temper = '';
 
         return(
             <div>
