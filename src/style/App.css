@@ -28,16 +28,15 @@
   border-radius: 5px;
 }
 
-.done {
-  background-color: rgba(7, 192, 32, 0.2);
+.alerte {
+  background-color: rgba(209, 56, 9, 0.637);
 }
 
 .item-lib{
   text-align:left;
 }
 
-.raye {
-  text-decoration: line-through;
-  font-style: italic;
-  color: gray;
+.alerte-txt {
+  font-style: bold;
+  color: white;
 }

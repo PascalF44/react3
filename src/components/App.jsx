@@ -1,48 +1,39 @@
 import React, { Component } from 'react';
 import '../style/App.css';
-import ListeVide from "./views/ListeVide";
-import ListeActive from "./views/ListeActive";
+import MesureMain from "./views/MesureMain";
+//import MesureAnnexe from "./views/MesureAnnexe";
 
 class App extends Component {
-  constructor(props){
-    super(props);
-    this.state={nomListeFromChild: "", listeActive: false};
-  }
+	constructor(props){
+	super(props);
+	this.state={ 
+		actuel: { heure: '', valeur: '' }, 
+		mini: { heure: '', valeur: '' }, 
+		maxi: { heure: '', valeur: '' }, 
+    	alerte: false };
+	}
 
-  myCallbackNomListe = (parm) => {
-    console.log("APP->myCallbackNomListe(" + parm + ")");
-    this.setState({nomListeFromChild: parm});
-  }
+	updateMesure = (mesure) => {
+		console.log("APP->updateMesure(" + mesure + ")");
+		this.setState({ actuel: mesure });
+		//si actuel < mini alors setState(mini: parm)
+		//si actuel > maxi alors setState(maxi: parm)
+		//si actuel >= seuil alors setState(alerte: true) sinon setState(alerte: false);
+  	}
 
-  myCallBackListeAffiche = (parm) => {
-    console.log("App->myCallBackListeAffiche(" + parm + ")");
-    this.setState({listeActive: parm});
-  }
-
-  render() {
-    return (
-      <div className="container">
-        <nav className="navbar sticky-top navbar-dark bg-danger">
-          <a className="navbar-brand">
-            <i className="fab fa-hotjar fa-3x d-inline-block align-top" />
-            &nbsp; Fever courses
-          </a>
-        </nav>
-        <div className="row">
-          <div className="col-sm-12 col-md-6 liste">
-            {!this.state.listeActive &&
-                <ListeVide propsChild={this.myCallbackNomListe} propsChildActive={this.myCallBackListeAffiche} />
-            }
-          </div>
-          <div className="col-sm-12 col-md-6 liste">
-            {this.state.listeActive &&
-              <ListeActive propsChild={this.state.nomListeFromChild} />
-            }
-          </div>
-        </div>
-      </div>
-    );
-  }
+  	render() {
+		let alerte=this.state.alerte;
+		  
+		return (
+			<div className="container">
+				<div className="row">
+					<div className="col-sm-12">
+						<MesureMain mesure={ this.updateMesure } alerte={ alerte } />
+					</div>
+				</div>
+			</div>
+		);
+	}
 }
 
 export default App;

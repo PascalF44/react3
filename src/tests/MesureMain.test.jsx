@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ListeActive from '../components/views/ListeActive';
+import MesureMain from '../components/views/MesureMain';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<ListeActive />, div);
+  ReactDOM.render(<MesureMain />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
