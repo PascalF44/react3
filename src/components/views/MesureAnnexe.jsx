@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-
 class MesureAnnexe extends Component{
+    // eslint-disable-next-line
     constructor(props){
         super(props);
     }
@@ -13,14 +13,23 @@ class MesureAnnexe extends Component{
      */
 
     render(){
-        let hhmm=this.props.mesure.heure;
-        let temper=this.props.mesure.valeur;
+        let classAttribDiv=["row item-ligne-annexe "];
+        let classAttribLib=["item-lib-annexe col-10 "];
+
+        if(this.props.alerte){
+            classAttribDiv.push("alerte");
+            classAttribLib.push("alerte-txt");
+        }
 
         return(
             <div>
-                <div>
-                        <span> { temper } </span>
-                        <span> { hhmm } </span>
+                <div className={ classAttribDiv.join("") }>
+                    <div className={ classAttribLib.join("") }>
+                        <span> { this.props.mesure.valeur } °C </span>
+                    </div>
+                    <div className={ classAttribLib.join("") }>
+                        <span> { this.props.mesure.heure } </span>
+                    </div>
                 </div>
             </div>
         );

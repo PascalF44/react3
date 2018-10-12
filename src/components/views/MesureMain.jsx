@@ -21,18 +21,15 @@ class MesureMain extends Component{
     }
 
     simulapi = () => {
-        console.log('MesureMain->simulapi()');
         const hhmm = this.nowFormatHMS();
         const temper = (Math.random() * 20).toFixed(1);
         const newMesure =  { heure: hhmm, valeur: temper };
-        console.log('simulapi->newMesure: ' + newMesure.valeur);
         this.setState(newMesure);
         console.log('simulapi->this.state: ' + this.state.valeur);
         this.props.mesure(newMesure);
     }
 
     diminuer = () =>{
-        console.log('MesureMain->diminuer()');
         const hhmm = this.nowFormatHMS();
         const newMesure =  { heure: hhmm, valeur: this.state.valeur - 0.5 };
         this.setState(newMesure);
@@ -40,7 +37,6 @@ class MesureMain extends Component{
     }
 
     augmenter = () =>{
-        console.log('MesureMain->augmenter()');
         const hhmm = this.nowFormatHMS();
         const newMesure =  { heure: hhmm, valeur: this.state.valeur + 0.5 };
         this.setState(newMesure);
@@ -59,12 +55,12 @@ class MesureMain extends Component{
         return(
             <div>
                 <div className={ classAttribDiv.join("") }>
-                        <div className={ classAttribLib.join("") }>
-                            <span> { this.state.valeur } °C</span>
-                        </div>
-                        <div className={ classAttribLib.join("") }>
-                            <span> { this.state.heure } </span>
-                        </div>
+                    <div className={ classAttribLib.join("") }>
+                        <span> { this.state.valeur } °C</span>
+                    </div>
+                    <div className={ classAttribLib.join("") }>
+                        <span> { this.state.heure } </span>
+                    </div>
                 </div>
                 <div className={ classAttribDiv.join("") }>
                     <button onClick = { this.diminuer }> - </button>
