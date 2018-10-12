@@ -14,7 +14,7 @@ class App extends Component {
 	}
 
 	updateMesure = (mesure) => {
-		console.log("APP->updateMesure(" + mesure + ")");
+		console.log("APP->updateMesure(" + mesure.valeur + ")");
 		this.setState({ actuel: mesure });
 		//si actuel < mini alors setState(mini: parm)
 		//si actuel > maxi alors setState(maxi: parm)
