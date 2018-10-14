@@ -1,48 +1,47 @@
 import React, { Component } from 'react';
 import '../style/App.css';
-import ListeVide from "./views/ListeVide";
-import ListeActive from "./views/ListeActive";
+import MesureMain from "./views/MesureMain";
+import MesureAnnexe from "./views/MesureAnnexe";
 
 class App extends Component {
-  constructor(props){
-    super(props);
-    this.state={nomListeFromChild: "", listeActive: false};
-  }
+	constructor(props){
+	super(props);
+	this.state={ 
+		actuel: { heure: '--:--:--', valeur: 20 }, 
+		mini: { heure: '--:--:--', valeur: 20 }, 
+		maxi: { heure: '--:--:--', valeur: 20 }, 
+		freq: 10000,
+    	alerte: false };
+	}
 
-  myCallbackNomListe = (parm) => {
-    console.log("APP->myCallbackNomListe(" + parm + ")");
-    this.setState({nomListeFromChild: parm});
-  }
+	updateMesure = (mesure) => {
+		this.setState({ actuel: mesure });
+		if(mesure.valeur <= this.state.mini.valeur) this.setState({ mini: mesure });
+		if(mesure.valeur >= this.state.maxi.valeur) this.setState({ maxi: mesure });
+		this.setState({ alerte: (mesure.valeur <= this.props.mini || mesure.valeur >= this.props.maxi) });
+  	}
 
-  myCallBackListeAffiche = (parm) => {
-    console.log("App->myCallBackListeAffiche(" + parm + ")");
-    this.setState({listeActive: parm});
-  }
-
-  render() {
-    return (
-      <div className="container">
-        <nav className="navbar sticky-top navbar-dark bg-danger">
-          <a className="navbar-brand">
-            <i className="fab fa-hotjar fa-3x d-inline-block align-top" />
-            &nbsp; Fever courses
-          </a>
-        </nav>
-        <div className="row">
-          <div className="col-sm-12 col-md-6 liste">
-            {!this.state.listeActive &&
-                <ListeVide propsChild={this.myCallbackNomListe} propsChildActive={this.myCallBackListeAffiche} />
-            }
-          </div>
-          <div className="col-sm-12 col-md-6 liste">
-            {this.state.listeActive &&
-              <ListeActive propsChild={this.state.nomListeFromChild} />
-            }
-          </div>
-        </div>
-      </div>
-    );
-  }
+  	render() {
+		return (
+			<div className="container">
+				<div className="row">
+					<div className="col-sm-12">
+						<MesureAnnexe mesure={ this.state.maxi } alerte={ this.state.maxi.valeur >= this.props.maxi } />
+					</div>
+				</div>
+				<div className="row">
+					<div className="col-sm-12">
+						<MesureMain mesure={ this.updateMesure } alerte={ this.state.alerte } frequence={ this.state.freq } />
+					</div>
+				</div>
+				<div className="row">
+					<div className="col-sm-12">
+						<MesureAnnexe mesure={ this.state.mini } alerte={ this.state.mini.valeur <= this.props.mini } />
+					</div>
+				</div>
+			</div>
+		);
+	}
 }
 
 export default App;
