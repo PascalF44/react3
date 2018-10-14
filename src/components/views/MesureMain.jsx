@@ -31,11 +31,15 @@ class MesureMain extends Component{
     simulapi = () => {
         let fdt = new FDT();
         const hhmm = fdt.nowFormatHMS();
-        const temper = (Math.random() * 30).toFixed(1);
-        const newMesure =  { heure: hhmm, valeur: temper };
-        this.setState({ mes: newMesure });
-        console.log('App->render: ' + this.state.mes.heure + ' -> ' + this.state.mes.valeur);
-        this.props.mesure(newMesure);
+        fetch('https://cloud.boltiot.com/remote/e08179db-97d0-49fb-82cc-d7f4f42222f1/analogRead?pin=A0&deviceName=BOLT5034218')
+        .then(res => res.json())
+        .then((data) => {
+            let temper = data.value/10;
+                this.setState({ mes: {heure: hhmm, valeur: temper } });
+                this.props.mesure({ heure: hhmm, valeur: temper });
+            },
+            (error) => { console.log("ERR: " + error) }
+        );
     }
 
     updateAvancement = () => {

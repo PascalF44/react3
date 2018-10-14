@@ -22,8 +22,6 @@ class App extends Component {
   	}
 
   	render() {
-		console.log('App->render: ' + this.state.maxi.heure + ' -> ' + this.state.maxi.valeur);
-
 		return (
 			<div className="container">
 				<div className="row">
