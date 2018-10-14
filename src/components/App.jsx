@@ -7,9 +7,10 @@ class App extends Component {
 	constructor(props){
 	super(props);
 	this.state={ 
-		actuel: { heure: '', valeur: 20 }, 
-		mini: { heure: '', valeur: 20 }, 
-		maxi: { heure: '', valeur: 20 }, 
+		actuel: { heure: '--:--:--', valeur: 20 }, 
+		mini: { heure: '--:--:--', valeur: 20 }, 
+		maxi: { heure: '--:--:--', valeur: 20 }, 
+		freq: 10000,
     	alerte: false };
 	}
 
@@ -21,7 +22,7 @@ class App extends Component {
   	}
 
   	render() {
-		console.log('App->render->this.state.maxi.valeur: ' + this.state.maxi.valeur);
+		console.log('App->render: ' + this.state.maxi.heure + ' -> ' + this.state.maxi.valeur);
 
 		return (
 			<div className="container">
@@ -32,7 +33,7 @@ class App extends Component {
 				</div>
 				<div className="row">
 					<div className="col-sm-12">
-						<MesureMain mesure={ this.updateMesure } alerte={ this.state.alerte } />
+						<MesureMain mesure={ this.updateMesure } alerte={ this.state.alerte } frequence={ this.state.freq } />
 					</div>
 				</div>
 				<div className="row">

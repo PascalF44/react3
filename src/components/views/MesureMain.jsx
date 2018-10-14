@@ -12,16 +12,36 @@ import 'react-circular-progressbar/dist/styles.css';
 class MesureMain extends Component{
     constructor(props) {
         super(props);
-        this.state={ heure: '', valeur: 20.0 }
+        this.state={
+            mes: { heure: '--:--:--', valeur: 20.0 },
+            avancement: 0
+        }
+    }
+
+    componentDidMount(){
+        this.timerProgID = setInterval(() => this.updateAvancement(), 1000);
+        this.timerID = setInterval(() => this.simulapi(), this.props.frequence);
+    }
+
+    componentWillUnmount(){
+        clearInterval(this.timerProgID);
+        clearInterval(this.timerID);
     }
 
     simulapi = () => {
-        const hhmm = FDT.nowFormatHMS;
-        const temper = (Math.random() * 20).toFixed(1);
+        let fdt = new FDT();
+        const hhmm = fdt.nowFormatHMS();
+        const temper = (Math.random() * 30).toFixed(1);
         const newMesure =  { heure: hhmm, valeur: temper };
-        this.setState(newMesure);
-        console.log('simulapi->this.state: ' + this.state.valeur);
+        this.setState({ mes: newMesure });
+        console.log('App->render: ' + this.state.mes.heure + ' -> ' + this.state.mes.valeur);
         this.props.mesure(newMesure);
+    }
+
+    updateAvancement = () => {
+        this.setState((oldstate, props) => ({ 
+            avancement: oldstate.avancement >= props.frequence ? 1000 : oldstate.avancement + 1000
+        }));
     }
 
     diminuer = () =>{
@@ -36,8 +56,8 @@ class MesureMain extends Component{
         let fdt = new FDT();
         const hhmm = fdt.nowFormatHMS();
         console.log('MesureMain->varier->hhmm: ' + hhmm)
-        const newMesure =  { heure: hhmm, valeur: this.state.valeur + delta };
-        this.setState(newMesure);
+        const newMesure =  { heure: hhmm, valeur: this.state.mes.valeur + delta };
+        this.setState({ ms: newMesure });
         this.props.mesure(newMesure);
     }
 
@@ -50,22 +70,22 @@ class MesureMain extends Component{
             classAttribLib.push("alerte-txt");
         }
 
-        const percentage = 66;
+        const pourcentProg = this.state.avancement / this.props.frequence * 100;
 
         return(
             <div style={{ width: '250px' }}>
                 <div className={ classAttribDiv.join("") }>
                     <div className={ classAttribLib.join("") } >
                         <RCP 
-                            percentage={ percentage } 
-                            text={ this.state.valeur + '°C' } 
+                            percentage={ pourcentProg } 
+                            text={ this.state.mes.valeur + '°C' } 
                             styles={{
                                 text: {
                                   fill: '#000',
                                 }
                             }}
                         />
-                        <span> { this.state.heure } </span>
+                        <span> { this.state.mes.heure } </span>
                     </div>
                 </div>
                 <div className={ classAttribDiv.join("") }>
