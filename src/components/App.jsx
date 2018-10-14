@@ -15,15 +15,14 @@ class App extends Component {
 
 	updateMesure = (mesure) => {
 		this.setState({ actuel: mesure });
-		//si actuel < mini alors setState(mini: parm)
 		if(mesure.valeur <= this.state.mini.valeur) this.setState({ mini: mesure });
-		//si actuel > maxi alors setState(maxi: parm)
 		if(mesure.valeur >= this.state.maxi.valeur) this.setState({ maxi: mesure });
-		//si actuel >= seuil alors setState(alerte: true) sinon setState(alerte: false);
-		this.setState({ alerte: (mesure.valeur <= 15 || mesure.valeur >= 25) });
+		this.setState({ alerte: (mesure.valeur <= this.props.mini || mesure.valeur >= this.props.maxi) });
   	}
 
   	render() {
+		console.log('App->render->this.state.maxi.valeur: ' + this.state.maxi.valeur);
+
 		return (
 			<div className="container">
 				<div className="row">

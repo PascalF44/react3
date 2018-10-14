@@ -6,22 +6,17 @@
  */
 
 import React, {Component} from "react";
+import FDT from '../utils/FormatDateTime';
+import RCP from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 class MesureMain extends Component{
     constructor(props) {
         super(props);
-        this.state={ heure: this.nowFormatHMS(), valeur: 20.0 }
-    }
-
-    nowFormatHMS = () => {
-        let now = new Date();
-        let hh = now.getHours() > 9 ? now.getHours() : '0' + now.getHours();
-        let mm = now.getMinutes() > 9 ? now.getMinutes() : '0' + now.getMinutes();
-        let ss = now.getSeconds() > 9 ? now.getSeconds() : '0' + now.getSeconds();
-        return (hh + ':' + mm + ':' + ss);
+        this.state={ heure: '', valeur: 20.0 }
     }
 
     simulapi = () => {
-        const hhmm = this.nowFormatHMS();
+        const hhmm = FDT.nowFormatHMS;
         const temper = (Math.random() * 20).toFixed(1);
         const newMesure =  { heure: hhmm, valeur: temper };
         this.setState(newMesure);
@@ -30,15 +25,18 @@ class MesureMain extends Component{
     }
 
     diminuer = () =>{
-        const hhmm = this.nowFormatHMS();
-        const newMesure =  { heure: hhmm, valeur: this.state.valeur - 0.5 };
-        this.setState(newMesure);
-        this.props.mesure(newMesure);
+        this.varier(-0.5);
     }
 
     augmenter = () =>{
-        const hhmm = this.nowFormatHMS();
-        const newMesure =  { heure: hhmm, valeur: this.state.valeur + 0.5 };
+        this.varier(0.5);
+    }
+
+    varier = (delta) => {
+        let fdt = new FDT();
+        const hhmm = fdt.nowFormatHMS();
+        console.log('MesureMain->varier->hhmm: ' + hhmm)
+        const newMesure =  { heure: hhmm, valeur: this.state.valeur + delta };
         this.setState(newMesure);
         this.props.mesure(newMesure);
     }
@@ -52,13 +50,21 @@ class MesureMain extends Component{
             classAttribLib.push("alerte-txt");
         }
 
+        const percentage = 66;
+
         return(
-            <div>
+            <div style={{ width: '250px' }}>
                 <div className={ classAttribDiv.join("") }>
-                    <div className={ classAttribLib.join("") }>
-                        <span> { this.state.valeur } °C</span>
-                    </div>
-                    <div className={ classAttribLib.join("") }>
+                    <div className={ classAttribLib.join("") } >
+                        <RCP 
+                            percentage={ percentage } 
+                            text={ this.state.valeur + '°C' } 
+                            styles={{
+                                text: {
+                                  fill: '#000',
+                                }
+                            }}
+                        />
                         <span> { this.state.heure } </span>
                     </div>
                 </div>

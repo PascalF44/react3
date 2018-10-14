@@ -1,26 +1,5 @@
-.liste-header {
-  padding: 15px;
-  margin-top: 5%;
-  margin-bottom: 5%;
-  margin-right: 10%;
-  margin-left: 10%;
-  border-radius: 5px;
-}
-
-.liste-form {
-  margin-left: 10%;
-}
-
-.vide {
-  background-color: rgba(192, 7, 7,.4);
-}
-
-.active {
-  background-color: rgba(7, 192, 32, 0.4);
-}
-
 .item-ligne {
-  background-color: rgba(117, 151, 247, 0.4);
+  background-color: rgb(255, 255, 255);
   padding: 5px;
   margin-top: 1%;
   margin-left: 10%;
@@ -33,7 +12,7 @@
 }
 
 .item-lib{
-  text-align:left;
+  text-align:center;
 }
 
 .alerte-txt {

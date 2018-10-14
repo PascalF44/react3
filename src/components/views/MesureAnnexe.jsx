@@ -13,7 +13,7 @@ class MesureAnnexe extends Component{
      */
 
     render(){
-        let classAttribDiv=["row item-ligne-annexe "];
+        let classAttribDiv=["row item-ligne "];
         let classAttribLib=["item-lib-annexe col-10 "];
 
         if(this.props.alerte){
