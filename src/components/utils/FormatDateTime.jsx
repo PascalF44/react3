@@ -13,7 +13,6 @@ class FormatDateTime extends Component{
         let ss = now.getSeconds() > 9 ? now.getSeconds() : '0' + now.getSeconds();
         return (hh + ':' + mm + ':' + ss);
     }
-
 }
 
 export default FormatDateTime;

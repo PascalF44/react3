@@ -1,10 +1,11 @@
 .item-ligne {
   background-color: rgb(255, 255, 255);
   padding: 5px;
-  margin-top: 1%;
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
   border-radius: 5px;
+  border: 1px solid rgb(214, 214, 214);
 }
 
 .alerte {
@@ -12,10 +13,19 @@
 }
 
 .item-lib{
-  text-align:center;
+  text-align: center;
+  font-size: small;
 }
+
+.item-lib-annexe{
+  text-align: left;
+  font-size: small;
+  text-align: center;
+}
+
 
 .alerte-txt {
   font-style: bold;
+  font-size: small;
   color: white;
 }

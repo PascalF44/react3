@@ -9,11 +9,12 @@ import React, {Component} from "react";
 import FDT from '../utils/FormatDateTime';
 import RCP from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+
 class MesureMain extends Component{
     constructor(props) {
         super(props);
         this.state={
-            mes: { heure: '--:--:--', valeur: 20.0 },
+            mes: { heure: '--:--:--', valeur: '--' },
             avancement: 0
         }
     }
@@ -48,6 +49,10 @@ class MesureMain extends Component{
         }));
     }
 
+    automatiser = () =>{
+        
+    }
+
     diminuer = () =>{
         this.varier(-0.5);
     }
@@ -57,17 +62,23 @@ class MesureMain extends Component{
     }
 
     varier = (delta) => {
+        console.log('AVANT -> this.state.mes.valeur: ' + this.state.mes.valeur);
         let fdt = new FDT();
         const hhmm = fdt.nowFormatHMS();
-        console.log('MesureMain->varier->hhmm: ' + hhmm)
-        const newMesure =  { heure: hhmm, valeur: this.state.mes.valeur + delta };
-        this.setState({ ms: newMesure });
+        const newval = (this.state.mes.valeur === '--' ? delta : this.state.mes.valeur + delta)
+        const newMesure =  { heure: hhmm, valeur: newval };
+        console.log('AVANT -> newMesure.valeur: ' + newMesure.valeur);
+        this.setState({ mes: newMesure });
+        console.log('Callback  ' + this.state.mes.valeur);
         this.props.mesure(newMesure);
     }
 
+ 	/**
+	 * TODO : mettre à jour les CSS
+	 */
     render() {
         let classAttribDiv=["row item-ligne "];
-        let classAttribLib=["item-lib col-10 "];
+        let classAttribLib=["item-lib "];
 
         if(this.props.alerte){
             classAttribDiv.push("alerte");
@@ -77,12 +88,12 @@ class MesureMain extends Component{
         const pourcentProg = this.state.avancement / this.props.frequence * 100;
 
         return(
-            <div style={{ width: '250px' }}>
+            <div style={{ width: '220px' }}>
                 <div className={ classAttribDiv.join("") }>
                     <div className={ classAttribLib.join("") } >
                         <RCP 
                             percentage={ pourcentProg } 
-                            text={ this.state.mes.valeur + '°C' } 
+                            text={ this.state.mes.valeur + ' °C' } 
                             styles={{
                                 text: {
                                   fill: '#000',
@@ -92,10 +103,11 @@ class MesureMain extends Component{
                         <span> { this.state.mes.heure } </span>
                     </div>
                 </div>
-                <div className={ classAttribDiv.join("") }>
+                {/* <div className={ classAttribDiv.join("") }>
                     <button onClick = { this.diminuer }> - </button>
                     <button onClick = { this.augmenter }> + </button>
-                </div>
+                    <button onClick = { this.automatiser }> auto </button>
+                </div> */}
             </div>
         );
     }
