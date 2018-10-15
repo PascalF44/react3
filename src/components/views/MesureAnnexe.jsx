@@ -6,15 +6,13 @@ class MesureAnnexe extends Component{
     }
 
     /**
-     * TODO : afficher la température et l'heure reçues en props
-     * aucun comportement/état pour ce composant
-     * CSS spécifique (affichage plus petit que le Main)
+     * TODO : mettre à jour les CSS spécifique (affichage plus petit que le Main)
      * Composant mutualisé pour affichage du MIN (sous le Main ) et du MAX (au dessus du Main)
      */
 
     render(){
         let classAttribDiv=["row item-ligne "];
-        let classAttribLib=["item-lib-annexe col-10 "];
+        let classAttribLib=["item-lib-annexe "];
 
         if(this.props.alerte){
             classAttribDiv.push("alerte");
@@ -22,13 +20,10 @@ class MesureAnnexe extends Component{
         }
 
         return(
-            <div>
+            <div style={{ width: '220px' }}>
                 <div className={ classAttribDiv.join("") }>
                     <div className={ classAttribLib.join("") }>
-                        <span> { this.props.mesure.valeur } °C </span>
-                    </div>
-                    <div className={ classAttribLib.join("") }>
-                        <span> { this.props.mesure.heure } </span>
+                        <span> { this.props.titre + this.props.mesure.valeur } °C ({ this.props.mesure.heure })</span>
                     </div>
                 </div>
             </div>
